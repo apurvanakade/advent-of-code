@@ -8,16 +8,18 @@ class Board:
     self.col_sums = [False] * 5
     self.bingo = False
     self.final_draw = -1
+    self.final_turn = -1
 
   def __str__(self):
     return '\n'.join([' '.join([str(j) for j in i]) for i in self.entries])
 
-  def update(self, draw):
+  def update(self, draw, i):
     
     if self.bingo:
       return self.bingo
 
     self.final_draw = draw
+    self.final_turn = i
 
     for i in range(5):
       for j in range(5):
@@ -48,17 +50,17 @@ already_drawn = [False]*(largest_number-smallest_number+1)
 
 boards = [Board(boards_raw[i+1:i+6]) for i in range(0, len(boards_raw), 6)]
 
-def update_boards(draw):
-  for board in boards:
-    if(board.update(draw)):
-      return board
-  return -1
-
-for draw in draws: 
+for i in range(len(draws)):
+  draw = draws[i] 
   if not already_drawn[draw]:
     already_drawn[draw] = True
-    bingo_board = update_boards(draw)
-    if bingo_board != -1:
-      print(bingo_board)
-      print(bingo_board.final_score())
-      break        
+    for board in boards:
+      board.update(draw, i)
+    
+# for board in boards:
+#   if(board.bingo):
+#     print(board.final_score(), board.final_draw, board.final_turn)
+
+final_scores = [(board.final_score(), board.final_turn) for board in boards if board.bingo]
+
+print(max(final_scores, key=lambda x:x[1]))
