@@ -28,7 +28,5 @@ for line in lines:
     scores.append(score)
 
 scores.sort()
-print(len(scores)) #47
+# print(len(scores)) #47
 print(scores[23])
-
-    

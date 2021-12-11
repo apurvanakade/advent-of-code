@@ -21,4 +21,3 @@ for line in lines:
         break
 
 print(score)
-    
