@@ -94,17 +94,7 @@ class Tree:
     if self.is_leaf():
       return self.value
     return 3*self.left.magnitude() + 2*self.right.magnitude()
-
-  def traverse(self, start = None):
-    if start == None:
-      start = self.leftmost_leaf()
-    
-    while start:
-      if self.depth >= 5:
-        explode(self, self.next_leaf_to_right())
-        start = start.next_leaf_to_right()
-    
-    return None
+  
       
 def explode(left_leaf : Tree):
   right_leaf = left_leaf.next_leaf_to_right()
@@ -142,8 +132,7 @@ def split(leaf : Tree):
   right.parent = leaf
 
   leaf.value = None
-
-  return left
+  
   
 def detonate(root : Tree):
   explosion = False
@@ -165,15 +154,6 @@ def check_splits(root : Tree):
       return True
     start = start.next_leaf_to_right()
   return False
-
-
-root = Tree()
-root.parse_input(input[0])
-
-for line in input[1:]:
-  new_root = Tree()
-  new_root.parse_input(line)
-  root = Tree(root, new_root)
 
 pairwise_sums = []
 
