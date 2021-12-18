@@ -1,8 +1,6 @@
 with open('input.txt', 'r') as f:
   input = [line.strip() for line in f.readlines()]
 
-
-
 class Tree:
   
   def __init__(self, left = None, right = None):
@@ -92,30 +90,14 @@ class Tree:
       string += ',' + self.right.__str__() + ']'
     return string
 
-
   def magnitude(self):
     if self.is_leaf():
       return self.value
     return 3*self.left.magnitude() + 2*self.right.magnitude()
 
-  def traverse(self, start = None):
-    if start == None:
-      start = self.leftmost_leaf()
-    
-    while start:
-      if self.depth >= 5:
-        explode(self, self.next_leaf_to_right())
-        start = start.next_leaf_to_right()
-    
-    return None
-      
-    
-
-      
-
+  
 def explode(left_leaf : Tree):
   right_leaf = left_leaf.next_leaf_to_right()
-  # if right_leaf:
   leaf_to_left = left_leaf.next_leaf_to_left()
   leaf_to_right = right_leaf.next_leaf_to_right()
 
@@ -135,9 +117,6 @@ def explode(left_leaf : Tree):
 
   if leaf_to_right:
     leaf_to_right.value += right_leaf.value
-      
-      # return True
-    # return False
 
 def split(leaf : Tree):
   left = Tree()
@@ -153,8 +132,6 @@ def split(leaf : Tree):
   right.parent = leaf
 
   leaf.value = None
-
-  return left
   
 
 root = Tree()
