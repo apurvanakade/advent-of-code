@@ -1,35 +1,25 @@
 input_filename = './input.txt'
 output_filename = './output1.txt'
 
-plays = {
-  'A' : 1,
-  'B' : 2,
-  'C' : 3,
-  'X' : 1,
-  'Y' : 2,
-  'Z' : 3
-}
+priority = 0
 
-win_scores = [
-  [3, 0, 6],
-  [6, 3, 0],
-  [0, 6, 3]
-]
-
-score = 0
-
-# read input.txt one line at a time
 with open(input_filename, 'r') as f:
   for line in f:
-    first, second = line.split()
-    play1 = plays[first]
-    play2 = plays[second]
 
-    score += play2 + win_scores[play2 - 1][play1 - 1]
+    length = len(line)
 
-print(score)
+    first_half = line[0:length//2]
+    second_half = line[length//2:length]
 
+    first_set = set(first_half)
+    second_set = set(second_half)
+    
+    intersection = first_set.intersection(second_set).pop()
 
+    if intersection.islower():
+      priority += ord(intersection) - ord('a') + 1
+    else:
+      priority += ord(intersection) - ord('A') + 27
 
-
+print(priority)
 
