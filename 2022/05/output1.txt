@@ -1,0 +1,2 @@
+max_calories: [6000, 11000, 24000]
+total_max_calories: 41000

@@ -1,0 +1,2 @@
+max_calories: [68527, 69741, 69912]
+total_max_calories: 208180
